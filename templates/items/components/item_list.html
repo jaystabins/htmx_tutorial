@@ -1,0 +1,28 @@
+<div class='container'>
+    {% if items %}
+    {% for item in items %}
+    <div class='row'>
+       <div class='col col-6'> {{ item.name }} </div>
+       <div class='col col-1'><i class="fa-solid fa-pencil text-warning"data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            hx-trigger='click'
+            hx-get="{% url 'item-update' item.id %}"
+            hx-target='#modal-swap'
+            ></i></div>
+        <div class='col col-1'><i class="fa-solid fa-eye text-info"data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            hx-trigger='click'
+            hx-get="{% url 'item-detail' item.id %}"
+            hx-target='#modal-swap'
+            ></i></div>
+       <div class='col col-1'><i class="fa-solid fa-trash-can text-danger"data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+            hx-trigger='click'
+            hx-get="{% url 'item-delete' item.id %}"
+            hx-target='#modal-swap'
+            ></i></div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class='row'>
+        <small>No Items, add one above</small>
+    </div>
+    {% endif %}
+</div>

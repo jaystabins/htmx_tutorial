@@ -1,0 +1,32 @@
+{% extends 'base.html' %}   
+
+
+{% block content %}
+<h1>Welcome to item list</h1>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+    hx-get='{% url "item-create" %}'
+    hx-trigger='click'
+    hx-target='#modal-swap'
+>
+    Add Item
+  </button>
+
+  <h3>Item List</h3>
+  <div id="item-list-view"
+        hx-get='{% url "item-list" %}'
+        hx-trigger='load, item_list_updated from:body'
+        >
+        <!-- HTMX Item List goes here -->
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id='modal-swap'>
+        <!-- HTMX Modal Content goes here -->
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
