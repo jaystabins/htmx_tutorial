@@ -21,8 +21,8 @@ class ItemDetailView(DetailView):
     class Meta:
         model = Item
 
-    def get_queryset(self, queryset=None):
-        return Item.objects.filter(pk=self.kwargs['pk'])
+    def get_queryset(self):
+        return Item.objects.filter(pk=self.kwargs.get('pk'))
 
 class ItemUpdateView(UpdateView):
     form_class = ItemForm
@@ -31,8 +31,7 @@ class ItemUpdateView(UpdateView):
         model = Item
 
     def get_queryset(self):
-        pk = self.kwargs.get('pk')
-        return Item.objects.filter(pk=pk)
+        return Item.objects.filter(pk=self.kwargs.get('pk'))
 
     def form_valid(self, form):
         form.save()
@@ -47,8 +46,7 @@ class ItemDeleteView(DeleteView):
         model = Item
         
     def get_queryset(self):
-        pk = self.kwargs.get('pk')
-        return Item.objects.filter(pk=pk)
+        return Item.objects.filter(pk=self.kwargs.get('pk'))
 
     def delete(self, request, *args, **kwargs):
         self.get_object().delete()
